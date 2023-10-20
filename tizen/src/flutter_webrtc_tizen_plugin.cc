@@ -54,7 +54,7 @@ namespace flutter_webrtc_plugin {
         // Called when a method is called on |channel_|;
         void HandleMethodCall(const MethodCall &method_call,
                               std::unique_ptr <MethodResult> result) {
-            LOG_ERROR('METHOD CALL')
+            LOG_ERROR("METHOD CALL");
             // handle method call and forward to webrtc native sdk.
             auto method_call_proxy = MethodCallProxy::Create(method_call);
             webrtc_->HandleMethodCall(*method_call_proxy.get(),

@@ -269,8 +269,12 @@ void FlutterWebRTC::HandleMethodCall(
         findString(constraints, "candidate").c_str(),
         findString(constraints, "sdpMid").c_str(),
         sdpMLineIndex == -1 ? 0 : sdpMLineIndex, &error);
-
-    AddIceCandidate(rtc_candidate.get(), pc, std::move(result));
+        LOG_ERROR("rtc_candidate was created");
+        try{
+            AddIceCandidate(rtc_candidate.get(), pc, std::move(result));
+        } catch (...){
+            LOG_ERROR("CAIU NO CATCH MALUCO");
+        }
   } else if (method_call.method_name().compare("getStats") == 0) {
     if (!method_call.arguments()) {
       result->Error("Bad Arguments", "Null constraints arguments received");

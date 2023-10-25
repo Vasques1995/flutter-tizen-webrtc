@@ -2,6 +2,7 @@
 
 #include "flutter_data_channel.h"
 #include "flutter_peerconnection.h"
+#include "log.h"
 
 namespace flutter_webrtc_plugin {
 
@@ -176,7 +177,7 @@ scoped_refptr<RTCMediaConstraints> FlutterWebRTCBase::ParseMediaConstraints(
       }
     }
   } else {
-    // Log.d(TAG, "optional constraints are not an array");
+      LOG_ERROR("optional constraints are not an array");
   }
 
   return media_constraints;

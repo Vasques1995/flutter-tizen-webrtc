@@ -19,7 +19,7 @@ void FlutterWebRTC::HandleMethodCall(
     const MethodCallProxy& method_call,
     std::unique_ptr<MethodResultProxy> result) {
     LOG_ERROR("HANDLE METHOD CALL");
-    LOG_ERROR("METHOD CALL NAME: %s", method_call.method_name());
+    LOG_ERROR("METHOD CALL NAME: %s", method_call.method_name().c_str());
     if (method_call.method_name().compare("createPeerConnection") == 0) {
     if (!method_call.arguments()) {
       result->Error("Bad Arguments", "Null arguments received");

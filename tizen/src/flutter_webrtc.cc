@@ -18,7 +18,7 @@ FlutterWebRTC::~FlutterWebRTC() {}
 void FlutterWebRTC::HandleMethodCall(
     const MethodCallProxy& method_call,
     std::unique_ptr<MethodResultProxy> result) {
-    LOG_ERROR("HANDLE METHOD CALL");
+    LOG_ERROR("FlutterWebRTC HANDLE METHOD CALL");
     LOG_ERROR("METHOD CALL NAME: %s", method_call.method_name().c_str());
     if (method_call.method_name().compare("createPeerConnection") == 0) {
     if (!method_call.arguments()) {
@@ -244,7 +244,8 @@ void FlutterWebRTC::HandleMethodCall(
 
     SetRemoteDescription(description.get(), pc, std::move(result));
   } else if (method_call.method_name().compare("addCandidate") == 0) {
-    if (!method_call.arguments()) {
+        if (!method_call.arguments()) {
+            LOG_ERROR("AddCandidate BadArguments, Null constraints arguments received");
       result->Error("Bad Arguments", "Null constraints arguments received");
       return;
     }
@@ -253,6 +254,7 @@ void FlutterWebRTC::HandleMethodCall(
     const std::string peerConnectionId = findString(params, "peerConnectionId");
     const EncodableMap constraints = findMap(params, "candidate");
     RTCPeerConnection* pc = PeerConnectionForId(peerConnectionId);
+    LOG_ERROR("AddCandidate Arguments\nPeerConnectionId: %s\nCandidate: %s\nsdpMid: %s\nsdpLineIndex: %d", peerConnectionId, findString(constraints, "candidate").c_str(), findString(constraints, "sdpMid").c_str(), findInt(constraints, "sdpMLineIndex"));
     if (pc == nullptr) {
       result->Error("addCandidateFailed",
                     "addCandidate() peerConnection is null");

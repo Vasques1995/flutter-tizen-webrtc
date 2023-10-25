@@ -797,6 +797,7 @@ void FlutterPeerConnection::GetSenders(
 void FlutterPeerConnection::AddIceCandidate(
     RTCIceCandidate* candidate, RTCPeerConnection* pc,
     std::unique_ptr<MethodResultProxy> result) {
+    //Log candidate()
   pc->AddCandidate(candidate->sdp_mid(), candidate->sdp_mline_index(),
                    candidate->candidate());
 
